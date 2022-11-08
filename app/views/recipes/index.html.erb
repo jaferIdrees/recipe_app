@@ -1,37 +1,11 @@
 <!-- inside app/views/home/index.html.erb -->
-<h1>Welcome, this is the home page</h1>  
-  
-<button type="button" 
-        class="btn btn-lg btn-success" 
-        data-bs-toggle="popover" 
-        title="Popover title" 
-        data-bs-content="Amazing content, right ?">
-        Click to toggle popover
-</button>  
-<nav class="navbar navbar-light bg-light">
-  <div class="container-fluid">
-    <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
-      data-mdb-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent"
-      aria-expanded="false" aria-label="Toggle navigation">
-      <i class="fas fa-bars"></i>
-    </button>
+<h1>Recipes List</h1>
+<% @recipes.each do |recipe|%>
+  <div class="card m-1" >
+    <div class="card-body">
+      <h5 class="card-title"><%= recipe.name %></h5>
+      <p class="card-text"><%= recipe.description %></p>
+      <a href="#" class="card-link">Remove</a>
+    </div>
   </div>
-</nav>
-<div class="collapse" id="navbarToggleExternalContent">
-  <div class="bg-light shadow-3 p-4">
-    <button class="btn btn-link btn-block border-bottom m-0">Link 1</button>
-    <button class="btn btn-link btn-block border-bottom m-0">Link 2</button>
-    <button class="btn btn-link btn-block m-0">Link 3</button>
-  </div>
-</div>
-<div class="dropdown">
-  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Dropdown link
-  </a>
-
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-    <a class="dropdown-item" href="#">Action</a>
-    <a class="dropdown-item" href="#">Another action</a>
-    <a class="dropdown-item" href="#">Something else here</a>
-  </div>
-</div>
+<% end %>
