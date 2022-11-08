@@ -1,0 +1,11 @@
+<%= bootstrap_form_for(@recipe,
+                   :url => user_recipes_path,
+                   :layout => :horizontal,
+                   :label_col => "col-md-3",
+                   :control_col => "col-md-4") do |f| %>
+  <%= f.text_field :name %>
+  <%= f.number_field :preparation_time %>
+  <%= f.number_field :cooking_time %>
+  <%= f.text_area :description %>
+  <%= f.check_box :public, switch: true %>
+<% end %>
