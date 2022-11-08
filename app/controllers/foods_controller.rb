@@ -7,7 +7,7 @@ class FoodsController < ApplicationController
   end
 
   def new
-    food = Food.new 
+    @food = Food.new 
   end
 
   def show 
@@ -19,9 +19,19 @@ class FoodsController < ApplicationController
   end
 
   def create
+    food = @user.foods.build(food_params)
+
+    if food.save
+      redirect_to user_foods_path ,notice: "Post was successfully created."
+    else 
+      render :new, status: :unprocessable_entity
+    end
   end
 
   private 
+  def food_params 
+    params.require(:food).permit(:name,:measurement_unit,:price,:quantity)
+  end
   def set_user 
     @user = User.find(params[:user_id])
   end
