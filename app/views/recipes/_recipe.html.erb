@@ -2,6 +2,6 @@
     <div class="card-body">
       <h5 class="card-title"><%= recipe.name %></h5>
       <p class="card-text"><%= recipe.description %></p>
-      <a href="#" class="card-link">Remove</a>
+      <a href="#" class="card-link"><%=link_to "🗑del Recipe", "/users/1/recipes/#{recipe.id}", data: { turbo_method: :delete, 'turbo-confirm': 'Are you sure?' }  %></a>
     </div>
   </div>

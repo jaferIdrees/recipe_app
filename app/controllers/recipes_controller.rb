@@ -1,7 +1,7 @@
 class RecipesController < ApplicationController
   def index
     @user = current_user
-    @recipes = Recipe.all
+    @recipes = Recipe.where(user_id: current_user.id)
   end
 
   def new
@@ -17,5 +17,12 @@ class RecipesController < ApplicationController
    else
     render inline: "<p>Error</p>"
    end
+  end
+
+  def destroy
+    @recipe = Recipe.find(params[:id])
+    @recipe.destroy
+
+    redirect_to user_recipes_path
   end
 end
