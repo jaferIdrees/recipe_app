@@ -1,11 +1,8 @@
 <!-- inside app/views/home/index.html.erb -->
 <h1>Recipes List</h1>
+<button type="button" class="btn btn-outline-primary">
+  <%=link_to "Add new recipe", new_user_recipe_path(@user)%>
+</button>
 <% @recipes.each do |recipe|%>
-  <div class="card m-1" >
-    <div class="card-body">
-      <h5 class="card-title"><%= recipe.name %></h5>
-      <p class="card-text"><%= recipe.description %></p>
-      <a href="#" class="card-link">Remove</a>
-    </div>
-  </div>
+  <%= render recipe%>
 <% end %>
