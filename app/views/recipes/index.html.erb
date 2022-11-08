@@ -1,6 +1,5 @@
-<!-- inside app/views/home/index.html.erb -->
-<h1>Recipes List</h1>
-<button type="button" class="btn btn-outline-primary">
+<h1 class="text-center text-success">Recipes List</h1>
+<button type="button" class="btn btn-outline-success m-2">
   <%=link_to "Add new recipe", new_user_recipe_path(@user)%>
 </button>
 <% @recipes.each do |recipe|%>

@@ -1,6 +1,8 @@
 <div class="card m-1" >
     <div class="card-body">
-      <h5 class="card-title"><%= recipe.name %></h5>
+      <h5 class="card-title">
+      <%=link_to "#{recipe.name}", user_recipe_url(id: recipe.id) %>
+      </h5>
       <p class="card-text"><%= recipe.description %></p>
       <button type="button" class="btn btn-danger"><%=link_to "🗑del Recipe", "/users/1/recipes/#{recipe.id}", data: { turbo_method: :delete, 'turbo-confirm': 'Are you sure?', class: 'text-white' }  %></button>
     </div>

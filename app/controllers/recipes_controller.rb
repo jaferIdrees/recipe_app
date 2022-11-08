@@ -4,6 +4,10 @@ class RecipesController < ApplicationController
     @recipes = Recipe.where(user_id: current_user.id)
   end
 
+  def show
+    @recipe = Recipe.find(params[:id])
+  end
+
   def new
     @recipe = Recipe.new
   end
@@ -15,7 +19,8 @@ class RecipesController < ApplicationController
                             description: params[:recipe][:description],
                             public: params[:recipe][:public])
     if new_recipe.save
-      render inline: '<p>Recipe saved successfuly.</p>'
+      redirect_to new_user_recipe_path(params[:user_id])
+
     else
       render inline: '<p>Error</p>'
     end
