@@ -11,9 +11,15 @@
     
   </head>
 
-  <body>
-  <p style="color: green"><%= notice %></p>
-    <div style="color: red"><%=alert %></p>
+  <body> 
+  <div class="container">
+   <%if notice%>
+   <p class="alert alert-success mt-4" role="alert"><%= notice %></p>
+   <%end%>
+    <%if alert%>
+    <p class="alert alert-danger mt-4" role="alert"><%=alert %></p>
+    <%end%>
     <%= yield %>
+    </div>
   </body>
 </html>

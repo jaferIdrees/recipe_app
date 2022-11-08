@@ -15,14 +15,14 @@ class FoodsController < ApplicationController
 
   def destroy 
     @food.destroy 
-    redirect_to user_foods_path, notice:"Food was successfully destroyed."
+    redirect_to user_foods_path, alert:"Food was successfully destroyed."
   end
 
   def create
     food = @user.foods.build(food_params)
 
     if food.save
-      redirect_to user_foods_path ,notice: "Post was successfully created."
+      redirect_to user_foods_path ,notice: "Food was successfully created."
     else 
       render :new, status: :unprocessable_entity
     end
