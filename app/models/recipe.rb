@@ -11,5 +11,5 @@ class Recipe < ApplicationRecord
     5 # this should be implemnted from new assocation
   end
   validates :name, presence: true, length: { maximum: 250 }
-  validates :preperation_time, :cooking_time, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
+  validates :preparation_time, :cooking_time, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
 end

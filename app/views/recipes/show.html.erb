@@ -1,0 +1,30 @@
+<h1 class="display-1 text-center"><%= @recipe.name %></h1>
+<div class="container px-4">
+  <div class="row gx-5">
+    <div class="col">
+      <div class="p-3 border bg-light display-6">Preparation time: <%= @recipe.preparation_time %> minutes</div>
+    </div>
+    <div class="col">
+      <div class="p-3 ps-auto">
+        <div class="form-check form-switch">
+          <% if @recipe.public %>
+            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDisabled" disabled checked >
+          <% else %>
+            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDisabled" disabled >
+          <% end %>
+          <label class="form-check-label" for="flexSwitchCheckDisabled">Public</label>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row gx-5">
+    <div class="col">
+      <div class="my-3 p-3 border bg-light display-6">Cooking time: <%= @recipe.cooking_time %> minutes</div>
+    </div>
+  </div>
+  <div class="row gx-5">
+    <div class="col">
+      <div class="my-3 p-3 border bg-light display-8">Description: <%= @recipe.description %> minutes</div>
+    </div>
+  </div>
+</div>
