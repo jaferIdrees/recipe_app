@@ -8,8 +8,18 @@
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
   </head>
-  <body>
+
+  <body> 
+  <div class="container">
+   <%if notice%>
+   <p class="alert alert-success mt-4" role="alert"><%= notice %></p>
+   <%end%>
+    <%if alert%>
+    <p class="alert alert-danger mt-4" role="alert"><%=alert %></p>
+    <%end%>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
     <%= yield %>
+    </div>
   </body>
 </html>

@@ -1,0 +1,26 @@
+<div class="container mt-5">
+<%= button_to "Add Food" ,new_user_food_path , method: :get,  class:"btn btn-primary mb-3" %>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Food</th>
+      <th scope="col">Measurement unit</th>
+      <th scope="col">Unit price</th>
+      <th scope="col">Quantity</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+   <% @foods.each do |food|  %>
+    <tr>
+      <th scope="row"><%= food.name.capitalize %></th>
+      <td><%= food.measurement_unit %></td>
+      <td>$<%= food.price %></td>
+      <td><%= food.quantity %></td>
+      <td><%= button_to "Delete" ,user_food_path(user_id:@user.id,id:food.id) , method: :delete , data:{confirme: 'are you sure?'}, class:"btn btn-link"%></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+</div>
