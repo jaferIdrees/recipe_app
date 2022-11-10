@@ -1,0 +1,21 @@
+<h1 class="mt-6">Shopping List  </h1>
+<p>Amount of food itmes to buy:<%= %> </p>
+<p>Total value of food needed: $<%= %> </p>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Food</th>
+      <th scope="col">Quantity</th>
+      <th scope="col">Price</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @shopping_list.each do |shoping| %>
+      <tr>
+        <td><%= shoping[:name] %></td>
+        <td><%= shoping[:quantity] %> <%= shoping[:measurement_unit] %></td>
+        <td>$<%= shoping[:price]%></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

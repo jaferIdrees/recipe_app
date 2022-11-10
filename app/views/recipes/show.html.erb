@@ -28,6 +28,12 @@
     </div>
   </div>
 </div>
+
+
+<% if can? :manage, @recipe  %>
+<%=link_to "Generate shoping list", user_recipe_shopping_list_path(user_id:current_user.id,recipe_id:@recipe.id) , class: "btn btn-primary" %>
+<% end %>
+
 <!-- Button trigger modal -->
 <% if can? :manage, @recipe  %>
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
