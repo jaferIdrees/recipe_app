@@ -2,6 +2,7 @@
 class Recipe < ApplicationRecord
   belongs_to :user
   has_many :recipe_foods
+  has_many :foods, through: :recipe_foods
 
   def total_food_count
     recipe_foods.count
@@ -10,4 +11,6 @@ class Recipe < ApplicationRecord
   def total_price
     5 # this should be implemnted from new assocation
   end
+  validates :name, presence: true, length: { maximum: 250 }
+  validates :preparation_time, :cooking_time, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
 end

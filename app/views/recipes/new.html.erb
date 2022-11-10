@@ -1,14 +1,35 @@
-<%= bootstrap_form_for(@recipe,
+<%= bootstrap_form_tag(
                    :url => user_recipes_path,
                    :layout => :horizontal,
                    :label_col => "col-md-3",
                    :control_col => "col-md-4") do |f| %>
   <%= f.text_field :name %>
+  <%= f.check_box :public, switch: true %>
   <%= f.number_field :preparation_time,  placeholder: 'Time in minutes' %>
   <%= f.number_field :cooking_time,  placeholder: 'Time in minutes' %>
   <%= f.text_area :description %>
-  <%= f.check_box :public, switch: true %>
-  <%= f.form_group do %>
-    <%= f.submit "Save recipe" %>
-  <% end %>
+  <%= f.submit "Save recipe" %>
 <% end %>
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-primary my-5" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    Add ingredient
+  </button>
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Add ingredient</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <%= render 'select_food'%>
+        </div>
+        <div class="modal-footer">
+          <%= button_to 'add food', recipes_add_food_path, data: :disable_with%>
+          <%# <input type="button" onclick="<% controller.add_food %>
+        </div>
+      </div>
+    </div>
+  </div>
+  

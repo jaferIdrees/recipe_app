@@ -1,4 +1,9 @@
 class RecipesController < ApplicationController
+  def initialize
+    super()
+    @added_foods = []
+  end
+
   def index
     @user = current_user
     @recipes = Recipe.where(user_id: current_user.id)
@@ -6,21 +11,50 @@ class RecipesController < ApplicationController
 
   def show
     @recipe = Recipe.find(params[:id])
+    @recipe_food = RecipeFood.new
+    @recipe_foods = RecipeFood.where(recipe_id: @recipe.id)
+    @foods = foods(@recipe_foods)
+    @food_choices = food_choices
+  end
+
+  def foods(recipe_foods)
+    foods = []
+    recipe_foods.each do |f|
+      food = { name: Food.find(f.food_id).name,
+               quantity: f.quantity,
+               price: Food.find(f.food_id).price,
+               id: f.id }
+      foods << food
+    end
+    foods
   end
 
   def new
     @recipe = Recipe.new
+    @food_choices = food_choices
+  end
+
+  def food_choices
+    foods = Food.where(user_id: current_user.id)
+    @food_choices = []
+
+    foods.each do |food|
+      @food_choices << [food.name, food.id]
+    end
+    @food_choices
   end
 
   def create
-    new_recipe = Recipe.new(user: current_user, name: params[:recipe][:name],
-                            preparation_time: params[:recipe][:preparation_time],
-                            cooking_time: params[:recipe][:cooking_time],
-                            description: params[:recipe][:description],
-                            public: params[:recipe][:public])
+    new_recipe = Recipe.new(user: current_user, name: params[:name],
+                            preparation_time: params[:preparation_time],
+                            cooking_time: params[:cooking_time],
+                            description: params[:description],
+                            public: params[:public])
     if new_recipe.save
-      redirect_to new_user_recipe_path(params[:user_id])
-
+      @added_foods.each do |food|
+        RecipeFood.create(quantity: food[:quantity], recipe_id: new_recipe.id, food_id: food[:id])
+      end
+      redirect_to user_recipes_path, notice: 'Recipe was successfully created.'
     else
       render inline: '<p>Error</p>'
     end
@@ -31,5 +65,13 @@ class RecipesController < ApplicationController
     @recipe.destroy
 
     redirect_to user_recipes_path
+  end
+
+  def add_food
+    food = {
+      id: params[:food],
+      quantity: params[:quantity]
+    }
+    @added_foods << food
   end
 end
