@@ -14,10 +14,11 @@
    <%= render 'shared/navbar'%>
   <div class="container">
 
-   <%if notice%>
+   <%if notice %>
    <p class="alert alert-success mt-4" role="alert"><%= notice %></p>
    <%end%>
-    <%if alert%>
+
+    <%if alert %>
     <p class="alert alert-danger mt-4" role="alert"><%=alert %></p>
     <%end%>
 

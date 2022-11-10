@@ -29,7 +29,7 @@
   </div>
 </div>
 <!-- Button trigger modal -->
-<% if can? manage: @recipe  %>
+<% if can? :manage, @recipe  %>
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
   Add ingredient
 </button>
