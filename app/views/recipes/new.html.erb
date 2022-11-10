@@ -4,14 +4,14 @@
                    :label_col => "col-md-3",
                    :control_col => "col-md-4") do |f| %>
   <%= f.text_field :name %>
+  <%= f.check_box :public, switch: true %>
   <%= f.number_field :preparation_time,  placeholder: 'Time in minutes' %>
   <%= f.number_field :cooking_time,  placeholder: 'Time in minutes' %>
   <%= f.text_area :description %>
-  <%= f.check_box :public, switch: true %>
   <%= f.submit "Save recipe" %>
 <% end %>
   <!-- Button trigger modal -->
-  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  <button type="button" class="btn btn-primary my-5" data-bs-toggle="modal" data-bs-target="#exampleModal">
     Add ingredient
   </button>
   <!-- Modal -->

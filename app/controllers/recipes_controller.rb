@@ -30,7 +30,6 @@ class RecipesController < ApplicationController
   end
 
   def new
-    @added_foods = []
     @recipe = Recipe.new
     @food_choices = food_choices
   end
@@ -55,7 +54,7 @@ class RecipesController < ApplicationController
       @added_foods.each do |food|
         RecipeFood.create(quantity: food[:quantity], recipe_id: new_recipe.id, food_id: food[:id])
       end
-      # redirect_to user_recipes_path
+      redirect_to user_recipes_path, notice: 'Recipe was successfully created.'
     else
       render inline: '<p>Error</p>'
     end
