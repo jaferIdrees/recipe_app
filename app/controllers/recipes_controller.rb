@@ -61,6 +61,7 @@ class RecipesController < ApplicationController
     else
       render inline: '<p>Error</p>'
     end
+
   end
 
   def destroy
