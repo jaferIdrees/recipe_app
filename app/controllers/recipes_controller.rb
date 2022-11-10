@@ -77,31 +77,7 @@ class RecipesController < ApplicationController
     }
     @added_foods << food
   end
-  def neede_food 
-    foods = []
-    recipe_foods.each do |f|
-      food = { name: Food.find(f.food_id).name,
-              quantity: f.quantity,
-              price: Food.find(f.food_id).price,
-              id: f.id }
-      foods << food
-    end
-    foods
-  end 
-  # food list of the user 
-  # recipes foods 
-  #  required = food -recipes_foods 
-  # 
 
-
-  #  price     
-#  <tr>
-# <td><%= shoping[:name] %></td>
-# <td><%= shoping[:quantity] %> <%= shoping[:measurement_unit] %></td>
-# <td>$<%= shoping[:quantity] * food[:price]%></td>
-# </tr>
-# 
-#   
 
   def get_shopping_list
     @shopping_list =[]
@@ -117,7 +93,8 @@ class RecipesController < ApplicationController
       
       @shopping_list << current_shop if  current_shop[:quantity].positive? 
     end
-      
+      @sum =0
+      @shopping_list.each {|element| @sum += element[:price] } 
   end
 
   private 
