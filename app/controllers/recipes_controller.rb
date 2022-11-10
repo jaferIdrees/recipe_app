@@ -13,19 +13,39 @@ class RecipesController < ApplicationController
 
   def show
     @recipe = Recipe.find(params[:id])
-    @foods = @recipe.foods
+    @recipe_food = RecipeFood.new
+    @recipe_foods = RecipeFood.where(recipe_id: @recipe.id)
+    def foods
+      foods = []
+      @recipe_foods.each do |f|
+      food = {name: Food.find(f.food_id).name,
+        quantity: f.quantity,
+        price: Food.find(f.food_id).price,
+        id: f.id
+      }
+      foods << food
+      end
+      foods
+    end
+    @foods = foods
+    @food_choices = food_choices
+    
   end
 
   def new
     @@added_foods = []
     @recipe = Recipe.new
+    @food_choices = food_choices
+  end
 
+  def food_choices
     foods = Food.where(user_id: current_user.id)
     @food_choices = []
 
     foods.each do |food|
       @food_choices << [food.name, food.id]
     end
+    @food_choices
   end
 
   def create
