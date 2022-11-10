@@ -1,10 +1,10 @@
 class RecipesController < ApplicationController
-  def initialize
-    super()
-    @added_foods = []
-  end
+  # def initialize
+  #   super()
+  #   @added_foods = []
+  # end
 
-  # @@added_foods = []
+  @@added_foods = []
 
   def index
     @user = current_user
@@ -18,18 +18,16 @@ class RecipesController < ApplicationController
     def foods
       foods = []
       @recipe_foods.each do |f|
-      food = {name: Food.find(f.food_id).name,
-        quantity: f.quantity,
-        price: Food.find(f.food_id).price,
-        id: f.id
-      }
-      foods << food
+        food = { name: Food.find(f.food_id).name,
+                 quantity: f.quantity,
+                 price: Food.find(f.food_id).price,
+                 id: f.id }
+        foods << food
       end
       foods
     end
     @foods = foods
     @food_choices = food_choices
-    
   end
 
   def new
@@ -55,7 +53,7 @@ class RecipesController < ApplicationController
                             description: params[:description],
                             public: params[:public])
     if new_recipe.save
-      
+
       @@added_foods.each do |food|
         RecipeFood.create(quantity: food[:quantity], recipe_id: new_recipe.id, food_id: food[:id])
       end
@@ -79,6 +77,5 @@ class RecipesController < ApplicationController
       quantity: params[:quantity]
     }
     @@added_foods << food
-    
   end
 end
