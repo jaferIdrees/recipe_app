@@ -52,7 +52,6 @@ class RecipesController < ApplicationController
                             description: params[:description],
                             public: params[:public])
     if new_recipe.save
-      rubocop :disable - next
       @added_foods.each do |food|
         RecipeFood.create(quantity: food[:quantity], recipe_id: new_recipe.id, food_id: food[:id])
       end
