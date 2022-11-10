@@ -3,7 +3,6 @@ class Recipe < ApplicationRecord
   belongs_to :user
   has_many :recipe_foods
   has_many :foods, through: :recipe_foods
-  
 
   def total_food_count
     recipe_foods.count
