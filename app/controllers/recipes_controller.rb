@@ -1,10 +1,8 @@
 class RecipesController < ApplicationController
-  # def initialize
-  #   super()
-  #   @added_foods = []
-  # end
-  rubocop :disable - next
-  @@added_foods = []
+  def initialize
+    super()
+    @added_foods = []
+  end
 
   def index
     @user = current_user
@@ -32,8 +30,7 @@ class RecipesController < ApplicationController
   end
 
   def new
-    rubocop :disable - next
-    @@added_foods = []
+    @added_foods = []
     @recipe = Recipe.new
     @food_choices = food_choices
   end
@@ -56,7 +53,7 @@ class RecipesController < ApplicationController
                             public: params[:public])
     if new_recipe.save
       rubocop :disable - next
-      @@added_foods.each do |food|
+      @added_foods.each do |food|
         RecipeFood.create(quantity: food[:quantity], recipe_id: new_recipe.id, food_id: food[:id])
       end
       # redirect_to user_recipes_path
@@ -73,12 +70,10 @@ class RecipesController < ApplicationController
   end
 
   def add_food
-    # binding.b
     food = {
       id: params[:food],
       quantity: params[:quantity]
     }
-    rubocop :disable - next
-    @@added_foods << food
+    @added_foods << food
   end
 end
