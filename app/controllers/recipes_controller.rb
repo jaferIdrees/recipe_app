@@ -3,7 +3,7 @@ class RecipesController < ApplicationController
   #   super()
   #   @added_foods = []
   # end
-
+  rubocop :disable - next
   @@added_foods = []
 
   def index
@@ -15,22 +15,24 @@ class RecipesController < ApplicationController
     @recipe = Recipe.find(params[:id])
     @recipe_food = RecipeFood.new
     @recipe_foods = RecipeFood.where(recipe_id: @recipe.id)
-    def foods
-      foods = []
-      @recipe_foods.each do |f|
-        food = { name: Food.find(f.food_id).name,
-                 quantity: f.quantity,
-                 price: Food.find(f.food_id).price,
-                 id: f.id }
-        foods << food
-      end
-      foods
-    end
-    @foods = foods
+    @foods = foods(@recipe_foods)
     @food_choices = food_choices
   end
 
+  def foods(recipe_foods)
+    foods = []
+    recipe_foods.each do |f|
+      food = { name: Food.find(f.food_id).name,
+               quantity: f.quantity,
+               price: Food.find(f.food_id).price,
+               id: f.id }
+      foods << food
+    end
+    foods
+  end
+
   def new
+    rubocop :disable - next
     @@added_foods = []
     @recipe = Recipe.new
     @food_choices = food_choices
@@ -53,7 +55,7 @@ class RecipesController < ApplicationController
                             description: params[:description],
                             public: params[:public])
     if new_recipe.save
-
+      rubocop :disable - next
       @@added_foods.each do |food|
         RecipeFood.create(quantity: food[:quantity], recipe_id: new_recipe.id, food_id: food[:id])
       end
@@ -61,7 +63,6 @@ class RecipesController < ApplicationController
     else
       render inline: '<p>Error</p>'
     end
-
   end
 
   def destroy
@@ -77,6 +78,7 @@ class RecipesController < ApplicationController
       id: params[:food],
       quantity: params[:quantity]
     }
+    rubocop :disable - next
     @@added_foods << food
   end
 end
