@@ -1,7 +1,7 @@
 class RecipesController < ApplicationController
-  load_and_authorize_resource 
-  before_action :set_food , :set_recipe_food, only: [:get_shopping_list]
-  
+  load_and_authorize_resource
+  before_action :set_food, :set_recipe_food, only: [:shopping_list]
+
   def initialize
     super()
     @added_foods = []
@@ -78,33 +78,30 @@ class RecipesController < ApplicationController
     @added_foods << food
   end
 
+  def shopping_list
+    @shopping_list = []
 
-  def get_shopping_list
-    @shopping_list =[]
-   
-    @recipe_foods.each do |recipe| 
-      current_shop = {name:'',quantity:-1,measurement_unit:'',price:-1}
-      food = @foods.select { |x| x.id == recipe.food_id}[0]
+    @recipe_foods.each do |recipe|
+      current_shop = { name: '', quantity: -1, measurement_unit: '', price: -1 }
+      food = @foods.select { |x| x.id == recipe.food_id }[0]
       current_shop[:name] = food.name
-      current_shop[:quantity] = recipe.quantity - food.quantity 
+      current_shop[:quantity] = recipe.quantity - food.quantity
       current_shop[:price] = food.price * current_shop[:quantity]
       current_shop[:measurement_unit] = food.measurement_unit
 
-      
-      @shopping_list << current_shop if  current_shop[:quantity].positive? 
+      @shopping_list << current_shop if current_shop[:quantity].positive?
     end
-      @sum =0
-      @shopping_list.each {|element| @sum += element[:price] } 
+    @sum = 0
+    @shopping_list.each { |element| @sum += element[:price] }
   end
 
-  private 
-  def set_food 
-    @foods = Recipe.find(params[:recipe_id]).foods 
-  end 
+  private
 
-  def set_recipe_food 
+  def set_food
+    @foods = Recipe.find(params[:recipe_id]).foods
+  end
+
+  def set_recipe_food
     @recipe_foods = Recipe.find(params[:recipe_id]).recipe_foods
   end
-
-
 end

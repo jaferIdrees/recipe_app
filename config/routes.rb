@@ -10,7 +10,7 @@ Rails.application.routes.draw do
     resources :foods
     resources :recipes do
       resources :recipe_foods, only: [:create, :update, :destroy]
-      get '/shopping_list' , to: 'recipes#get_shopping_list'
+      get '/shopping_list' , to: 'recipes#shopping_list'
     end
   end
   

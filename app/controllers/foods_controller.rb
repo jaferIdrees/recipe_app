@@ -1,5 +1,5 @@
 class FoodsController < ApplicationController
-  load_and_authorize_resource 
+  load_and_authorize_resource
   before_action :set_user
   before_action :set_food, only: %i[show edit update destroy]
 
