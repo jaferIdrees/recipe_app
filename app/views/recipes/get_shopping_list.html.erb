@@ -1,0 +1,23 @@
+<p class="mt-6 display-1 text-center">Shopping List  </p>
+<div class="d-flex  justify-content-between">
+<p class="text-left">Amount of food itmes to buy:<span class="ms-2 badge bg-success "><%=@shopping_list.count %></span> </p>
+<p  class="text-right">Total value of food needed: <span class="ms-2 badge bg-danger ">$<%=@sum %></span> </p>
+</div>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Food</th>
+      <th scope="col">Quantity</th>
+      <th scope="col">Price</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @shopping_list.each do |shoping| %>
+      <tr>
+        <td><%= shoping[:name] %></td>
+        <td><%= shoping[:quantity] %> <%= shoping[:measurement_unit] %></td>
+        <td>$<%= shoping[:price]%></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

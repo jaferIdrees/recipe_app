@@ -1,0 +1,10 @@
+<%= bootstrap_form_tag(
+                   :url => recipes_add_food_path,
+                   :layout => :horizontal,
+                   :label_col => "col-md-3",
+                   :control_col => "col-md-4") do |f| %>
+                   <%= f.select :food, @food_choices , { label: "Choose your favorite fruit:", wrapper: { class: 'has-warning', data: { foo: 'bar' } } }, { class: "selectpicker" } %>
+                   <%= f.number_field :quantity,  placeholder: 'Quantity' %>
+                   <%= f.submit "Add" %>
+                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+<% end %>

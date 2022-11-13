@@ -1,0 +1,13 @@
+<h1>Public Recipes </h1>
+
+<% @public_recipes.each do |public_recipe| %>
+<div class="card w-75 mt-4 ">
+  <div class="card-body">
+    <h5 class="card-title"><%=public_recipe.name%> By: <%=public_recipe.user.name%></h5>
+    <p class="card-text">Total Food items: <%= public_recipe.total_food_count%></p>
+    <p class="card-text">Total price:$ <%= public_recipe.total_price%></p>
+    <%= link_to  "show more",user_recipe_path(user_id:1,id:public_recipe.id), class:"btn btn-primary" %>
+  </div>
+</div>
+<% end %>
+
